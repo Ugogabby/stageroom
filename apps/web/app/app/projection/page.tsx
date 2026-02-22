@@ -37,13 +37,13 @@ const AUDIENCE_MODES = [
 /*  HELPERS                                                            */
 /* ------------------------------------------------------------------ */
 
-function formatTime(s) {
+function formatTime(s: number) {
   var m = Math.floor(s / 60);
   var sec = s % 60;
   return m.toString().padStart(2, "0") + ":" + sec.toString().padStart(2, "0");
 }
 
-function seededRand(seed) {
+function seededRand(seed: number) {
   var x = Math.sin(seed * 9301 + 49297) * 49297;
   return x - Math.floor(x);
 }
@@ -52,7 +52,7 @@ function seededRand(seed) {
 /*  SVG PERSON                                                         */
 /* ------------------------------------------------------------------ */
 
-function PersonSilhouette({ scale, seed, sitting }) {
+function PersonSilhouette({ scale, seed, sitting }: { scale: number; seed: number; sitting: boolean }) {
   var r = function (s) { return seededRand(seed + s); };
   var skinTone = r(1) > 0.5 ? "rgba(180,160,140," : "rgba(120,90,70,";
   var baseOpacity = 0.7 + r(2) * 0.3;
@@ -102,7 +102,7 @@ function PersonSilhouette({ scale, seed, sitting }) {
 /*  SILHOUETTE AUDIENCE                                                */
 /* ------------------------------------------------------------------ */
 
-function SilhouetteAudience({ venue }) {
+function SilhouetteAudience({ venue }: { venue: string }) {
   var config = VENUES.find(function (v) { return v.id === venue; }) || VENUES[2];
   var totalRows = config.rows;
   var totalPeople = config.seats;
@@ -158,7 +158,7 @@ function SilhouetteAudience({ venue }) {
 /*  PHOTO AUDIENCE                                                     */
 /* ------------------------------------------------------------------ */
 
-function PhotoAudience({ photos, venue }) {
+function PhotoAudience({ photos, venue }: { photos: string[]; venue: string }) {
   var config = VENUES.find(function (v) { return v.id === venue; }) || VENUES[2];
   var totalSeats = config.seats;
   var totalRows = config.rows;
@@ -226,7 +226,7 @@ function PhotoAudience({ photos, venue }) {
 /*  VIDEO AUDIENCE                                                     */
 /* ------------------------------------------------------------------ */
 
-function VideoAudience({ videoSrc, videoRef }) {
+function VideoAudience({ videoSrc, videoRef }: { videoSrc: string; videoRef: any }) {
   return (
     <div style={{
       position: "absolute", bottom: 0, left: 0, right: 0, height: "70%",
@@ -260,7 +260,7 @@ function VideoAudience({ videoSrc, videoRef }) {
 /*  FILE UPLOAD COMPONENTS                                             */
 /* ------------------------------------------------------------------ */
 
-function PhotoUploader({ photos, setPhotos }) {
+function PhotoUploader({ photos, setPhotos }: { photos: string[]; setPhotos: any }) {
   var inputRef = useRef(null);
 
   var handleFiles = function (e) {
@@ -329,7 +329,7 @@ function PhotoUploader({ photos, setPhotos }) {
   );
 }
 
-function VideoUploader({ videoSrc, setVideoSrc }) {
+function VideoUploader({ videoSrc, setVideoSrc }: { videoSrc: string | null; setVideoSrc: any }) {
   var inputRef = useRef(null);
 
   var handleFile = function (e) {
