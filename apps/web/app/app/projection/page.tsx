@@ -53,7 +53,7 @@ function seededRand(seed: number) {
 /* ------------------------------------------------------------------ */
 
 function PersonSilhouette({ scale, seed, sitting }: { scale: number; seed: number; sitting: boolean }) {
-  var r = function (s) { return seededRand(seed + s); };
+  var r = function (s: number) { return seededRand(seed + s); };
   var skinTone = r(1) > 0.5 ? "rgba(180,160,140," : "rgba(120,90,70,";
   var baseOpacity = 0.7 + r(2) * 0.3;
   var hairDark = r(3) > 0.4;
